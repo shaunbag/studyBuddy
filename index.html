@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>StudyBuddy</title>
+    <link rel="shortcut icon" type="image/jpg" href="./images/favicon.png"/> <!--link to favicon icon-->
+</head>
+<body>
+
+    <h1>The StudyBuddy</h1>
+
+    <div class="container">
+        <div class="calc">
+            <table>
+                
+                <th colspan="4">CALCULATOR</th>
+                
+                <tr>
+                    <td colspan="3"><input type=text id="result"/></td>
+                    <td><input type="button" value="c" onclick="clr()"/></td>
+                    
+                </tr>
+                <tr>
+                    <td><input type="button" value="1" onclick="dis('1')"/></td>
+                    <td><input type="button" value="2" onclick="dis('2')"/></td>
+                    <td><input type="button" value="3" onclick="dis('3')"/></td>
+                    <td><input type="button" value="/" onclick="dis('/')"/></td>
+                </tr>
+                
+                <tr>
+                    <td><input type="button" value="4" onclick="dis('4')"/></td>
+                    <td><input type="button" value="5" onclick="dis('5')"/></td>
+                    <td><input type="button" value="6" onclick="dis('6');"/></td>
+                    <td><input type="button" value="-" onclick="dis('-')"/></td>
+                </tr>
+                
+                <tr>
+                    <td><input type="button" value="7" onclick="dis('7')"/></td>
+                    <td><input type="button" value="8" onclick="dis('8')"/></td>
+                    <td><input type="button" value="9" onclick="dis('9')"/></td>
+                    <td><input type="button" value="+" onclick="dis('+')"/></td>
+                </tr>
+                
+                <tr>
+                    <td><input type="button" value="." onclick="dis('.')"/></td>
+                    <td><input type="button" value="0" onclick="dis('0')"/></td>
+                    <td><input type="button" value="=" onclick="solve()"/></td>
+                    <td><input type="button" value="*" onclick="dis('*');"/></td>
+                </tr>
+                
+            </table>
+        </div>
+
+        <div class="alarm">
+
+            <h2>ALARM CLOCK</h2>
+            <p id="time"></p><br>
+
+            <form>
+                <h2 id="set">Select the Hour of the alarm</h2><br>
+                <select id="option">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                    <option>21</option>
+                    <option>22</option>
+                    <option>23</option>
+                    <option>24</option>
+                </select>
+                <select id="seconds">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                    <option>21</option>
+                    <option>22</option>
+                    <option>23</option>
+                    <option>24</option>
+                    <option>25</option>
+                    <option>26</option>
+                    <option>27</option>
+                    <option>28</option>
+                    <option>29</option>
+                    <option>30</option>
+                    <option>31</option>
+                    <option>32</option>
+                    <option>33</option>
+                    <option>34</option>
+                    <option>35</option>
+                    <option>36</option>
+                    <option>37</option>
+                    <option>38</option>
+                    <option>39</option>
+                    <option>40</option>
+                    <option>41</option>
+                    <option>42</option>
+                    <option>43</option>
+                    <option>44</option>
+                    <option>45</option>
+                    <option>46</option>
+                    <option>47</option>
+                    <option>48</option>
+                    <option>49</option>
+                    <option>50</option>
+                    <option>51</option>
+                    <option>52</option>
+                    <option>53</option>
+                    <option>54</option>
+                    <option>55</option>
+                    <option>56</option>
+                    <option>57</option>
+                    <option>58</option>
+                    <option>59</option>
+                    <option>00</option>
+                </select><br><br>
+                
+                <button id="btn" type="button">Set Alarm</button> <!-- button to set alarm -->
+                <button id="stop" >Stop Alarm</button>
+            </form>   
+            <audio id="audio" src=""></audio> <!--audio tag where audio is loaded-->
+        </div>
+    </div>
+
+    <div class="quote">
+        <h2>"Inspirational Quote goes here" - Shaun Mcelhinney</h2>
+    </div>
+
+    <div>
+        <form>
+            <textarea class="text" rows="20%" cols="110%" placeholder="Use this Space for notes and text......"></textarea>
+            <button type="save">Save</button>
+        </form>
+    </div>
+
+    <script>
+
+        // calculator
+        
+        function dis(val) {
+            document.getElementById('result').value+=val;
+        }
+        
+                
+       
+        function solve() {
+            
+            let x = document.getElementById("result").value
+            let y = eval(x) 
+            document.getElementById("result").value = y 
+         } 
+        
+         function clr() {
+            document.getElementById("result").value= " ";
+        }
+
+
+
+        //Clock
+
+
+        function timer(){
+            
+            let time = new Date();                             // create clock function including if statements to add the 0 on numbers less than 10
+            let hours = time.getHours();
+            let minutes = time.getMinutes();
+            let seconds = time.getSeconds();
+            if(minutes < 10) {
+                minutes = "0" + minutes;
+            }
+            if(hours < 10) {
+                hours = "0" + hours;
+            }
+            if(seconds < 10) {
+                seconds = "0" + seconds;
+            }
+
+            document.getElementById('time').innerHTML = hours + ':' + minutes + ':' + seconds;
+        }
+        setInterval(timer, 1000);  // interval to ensure the clock updates each second
+
+        document.getElementById('btn').addEventListener('click', setAlarm); // on click event listener for the button
+
+        function setAlarm(){
+            console.log('its clicked');
+            document.getElementById('set').innerHTML = "Alarm Set";
+           
+           let audio = document.getElementById('audio'); // grab audio tag
+           audio.src = './alarm.mp3';                      // set audio src
+               audio.loop = true;                         // set audio to loop
+
+            const e = document.getElementById('option');
+            const h = e.options[e.selectedIndex].text;
+            const b = document.getElementById('seconds');
+            const s = b.options[b.selectedIndex].text;
+            const setTime = h + ':' + s;
+
+            setInterval(() => {
+                const time = new Date();
+                const hours = time.getHours();
+                const minutes = time.getMinutes();
+                const currentTime = hours + ':' + minutes;
+                console.log('Timer started ' + setTime + ' ' + currentTime)
+            if(setTime == currentTime) {
+               
+                audio.play();
+                console.log('time is right' + e + ' ' + b  );
+            }
+            },1000)
+        };
+
+        
+
+        document.getElementById('stop').addEventListener('click', stop);
+
+        function stop() {
+            let audio = document.getElementById('audio');
+            audio.pause();
+        }
+
+        //inspirational quotes api fetch
+
+
+        
+    </script>
+</body>
+</html>
