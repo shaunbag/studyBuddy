@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <title>StudyBuddy</title>
     <link rel="shortcut icon" type="image/jpg" href="./images/favicon.png"/> <!--link to favicon icon-->
 </head>
 <body>
 
-    <h1>The StudyBuddy</h1>
+    <h1 class="animate__animated animate__rubberBand">The StudyBuddy</h1>
 
     <div class="container">
         <div class="calc">
@@ -57,7 +58,7 @@
         <div class="alarm">
 
             <h2>ALARM CLOCK</h2>
-            <p id="time"></p><br>
+            <p id="time">Loading..</p><br>
 
             <form>
                 <h2 id="set">Select the Hour of the alarm</h2><br>
@@ -158,13 +159,13 @@
     </div>
 
     <div class="quote">
-        <h2>"Inspirational Quote goes here" - Shaun Mcelhinney</h2>
+        <h2 id="quote">"The best time to plant a tree was 20 years ago. The second best time is now." - Chinese Proverb</span></h2>
     </div>
 
     <div>
         <form>
-            <textarea class="text" rows="20%" cols="110%" placeholder="Use this Space for notes and text......"></textarea>
-            <button type="save">Save</button>
+            <textarea class="text" id="textbox" rows="20%" cols="110%" placeholder="Use this Space for notes and text......"></textarea>
+            <button type="save" id="save">Save</button> <a id="anchor" download="text.txt">DOWNLOAD</a>
         </form>
     </div>
 
@@ -174,12 +175,8 @@
         
         function dis(val) {
             document.getElementById('result').value+=val;
-        }
-        
-                
-       
-        function solve() {
-            
+        }      
+        function solve() {            
             let x = document.getElementById("result").value
             let y = eval(x) 
             document.getElementById("result").value = y 
@@ -228,7 +225,7 @@
             const h = e.options[e.selectedIndex].text;
             const b = document.getElementById('seconds');
             const s = b.options[b.selectedIndex].text;
-            const setTime = h + ':' + s;
+            let setTime = h + ':' + s;
 
             setInterval(() => {
                 const time = new Date();
@@ -242,20 +239,44 @@
                 console.log('time is right' + e + ' ' + b  );
             }
             },1000)
-        };
-
-        
+        };        
 
         document.getElementById('stop').addEventListener('click', stop);
 
         function stop() {
+            
             let audio = document.getElementById('audio');
-            audio.pause();
+            audio.pause();            
+            
         }
 
-        //inspirational quotes api fetch
+        //save txt to file
 
+        let textFile = null
+        makeTextFile = function (text) {
+        const data = new Blob([text], {type: 'text/plain'});
 
+        if (textFile !== null) {
+        window.URL.revokeObjectURL(textFile);                      // this section is the "Make the File" function which is invoked later to create the .txt file from the textarea value
+        }
+
+        textFile = window.URL.createObjectURL(data);
+
+        return textFile;
+    };
+        
+
+        document.getElementById('save').addEventListener('click', function(e) {            // the click listener to create the download button and text file
+            e.preventDefault();   // prevent the page from refreshing and losing all the text!!!
+
+            let text = document.getElementById('textbox').value;  // aquire the text input into the textarea      
+            console.log(text);
+            let anchor = document.getElementById('anchor');
+            anchor.href = makeTextFile(text); // here is the makefile function being invoked to create the file
+            anchor.style.color = 'red'; // this displays the download link in red
+            anchor.style.display = 'inline-block';
+        });
+        
         
     </script>
 </body>
