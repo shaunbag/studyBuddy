@@ -152,7 +152,7 @@
                 </select><br><br>
                 
                 <button id="btn" type="button">Set Alarm</button> <!-- button to set alarm -->
-                <button id="stop" >Stop Alarm</button>
+                <button id="stop" type="button">Stop Alarm</button>
             </form>   
             <audio id="audio" src=""></audio> <!--audio tag where audio is loaded-->
         </div>
@@ -164,7 +164,7 @@
 
     <div>
         <form>
-            <textarea class="text" id="textbox" rows="20%" cols="110%" placeholder="Use this Space for notes and text......"></textarea>
+            <textarea class="text" id="textbox" rows="20%" cols="110%" placeholder="Use this Space for notes and text, you can create a download file by clicking the green button below..."></textarea>
             <button type="save" id="save">Save</button> <a id="anchor" download="text.txt">DOWNLOAD</a>
         </form>
     </div>
@@ -227,7 +227,7 @@
             const s = b.options[b.selectedIndex].text;
             let setTime = h + ':' + s;
 
-            setInterval(() => {
+            const alarm = setInterval(() => {
                 const time = new Date();
                 const hours = time.getHours();
                 const minutes = time.getMinutes();
@@ -239,14 +239,17 @@
                 console.log('time is right' + e + ' ' + b  );
             }
             },1000)
-        };        
+            document.getElementById('stop').addEventListener('click', stop);
 
-        document.getElementById('stop').addEventListener('click', stop);
-
-        function stop() {
+        function stop(e) {
             
             let audio = document.getElementById('audio');
-            audio.pause();            
+            
+            audio.pause(); 
+            clearInterval(alarm);
+        };        
+
+                   
             
         }
 
